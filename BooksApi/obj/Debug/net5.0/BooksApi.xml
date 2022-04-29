@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>BooksApi</name>
+    </assembly>
+    <members>
+        <member name="M:BooksApi.Controllers.BooksController.Get">
+            <summary>
+            Get all books.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:BooksApi.Controllers.BooksController.Get(System.Int32)">
+            <summary>
+            Get a specific book by id.
+            </summary>
+            <param name="id">Book Id</param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksApi.Controllers.BooksController.Get(System.String)">
+            <summary>
+            Get a specific book by name.
+            </summary>
+            <param name="name">Book Title</param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksApi.Controllers.BooksController.Post(BooksApi.Models.BookInputModel)">
+            <summary>
+            Create a new book.
+            </summary>
+            <param name="bookInputModel">The book to create</param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksApi.Controllers.BooksController.Put(System.Int32,BooksApi.Models.BookInputModel)">
+            <summary>
+            Update a specific book.
+            </summary>
+            <param name="id">Book Id</param>
+            <param name="bookInputModel">Updated book data</param>
+            <returns></returns>
+        </member>
+        <member name="M:BooksApi.Controllers.BooksController.Delete(System.Int32)">
+            <summary>
+            Delete a specific book by id.
+            </summary>
+            <param name="id">Book Id</param>
+            <returns></returns>
+        </member>
+        <member name="P:BooksApi.Models.BookInputModel.Title">
+            <summary>
+            Book title
+            </summary>
+        </member>
+        <member name="P:BooksApi.Models.BookInputModel.Description">
+            <summary>
+            Book description
+            </summary>
+        </member>
+    </members>
+</doc>
