@@ -5776,11 +5776,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\gustavo.oliveira\\source\\repos\\BooksApi\\BooksApi\\BooksApi.csproj",
+      "projectUniqueName": "C:\\Users\\gustavo.oliveira\\Desktop\\GitPersonal\\BooksApi\\BooksApi\\BooksApi.csproj",
       "projectName": "BooksApi",
-      "projectPath": "C:\\Users\\gustavo.oliveira\\source\\repos\\BooksApi\\BooksApi\\BooksApi.csproj",
+      "projectPath": "C:\\Users\\gustavo.oliveira\\Desktop\\GitPersonal\\BooksApi\\BooksApi\\BooksApi.csproj",
       "packagesPath": "C:\\Users\\gustavo.oliveira\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\gustavo.oliveira\\source\\repos\\BooksApi\\BooksApi\\obj\\",
+      "outputPath": "C:\\Users\\gustavo.oliveira\\Desktop\\GitPersonal\\BooksApi\\BooksApi\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"

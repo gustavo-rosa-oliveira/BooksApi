@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "GmpS3fChG6LpEXcAEWjnSuNbkHDNwLyQz121C5CZLZUeB4EkaRNrawSTECiAj1WM5uEYaNqBMoaNpAl8xh4dWw==",
+  "dgSpecHash": "gLFzzmH3ClDxcAHvFKfpzuxx9VaU9DN4/Nt9oNCTERlIaqJfT0qrnOzZKlanl5UZbKu1UjUCEnGcNg2og+97aA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\gustavo.oliveira\\source\\repos\\BooksApi\\BooksApi\\BooksApi.csproj",
+  "projectFilePath": "C:\\Users\\gustavo.oliveira\\Desktop\\GitPersonal\\BooksApi\\BooksApi\\BooksApi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\gustavo.oliveira\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\gustavo.oliveira\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

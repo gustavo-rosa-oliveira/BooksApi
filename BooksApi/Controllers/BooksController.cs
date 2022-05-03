@@ -1,22 +1,25 @@
 ﻿using BooksApi.Models;
 using BooksApi.Persistence;
+using BooksApi.Repository;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Threading.Tasks;
 
 namespace BooksApi.Controllers
 {
     [Route("api/[controller]")]
     public class BooksController : ControllerBase
     {
-        private readonly BookDbContext _bookDbContext;
+        private readonly IBookService _bookService;
 
-        public BooksController(BookDbContext bookDbContext)
+        public BooksController(IBookService bookService)
         {
-            _bookDbContext = bookDbContext;
+            _bookService = bookService;
         }
+
 
         /// <summary>
         /// Get all books.
@@ -24,11 +27,13 @@ namespace BooksApi.Controllers
         /// <returns></returns>
         [HttpGet]
         [ProducesDefaultResponseType(typeof(List<Book>))]
-        public IActionResult Get()
+        public async Task<IActionResult> Get()
         {
-            return Ok(_bookDbContext.Books.ToList());
-        }
+            var books = await _bookService.GetAll();
 
+            return Ok(books);
+        }
+        
         /// <summary>
         /// Get a specific book by id.
         /// </summary>
@@ -36,16 +41,16 @@ namespace BooksApi.Controllers
         /// <returns></returns>
         [HttpGet("{id:int}")]
         [ProducesDefaultResponseType(typeof(Book))]
-        public IActionResult Get(int id)
+        public async Task<IActionResult> Get(int id)
         {
-            var book = _bookDbContext.Books.SingleOrDefault(b => b.Id == id);
+            var book = await _bookService.GetById(id);
 
             if (book == null)
                 return NotFound();
 
             return Ok(book);
         }
-
+        
         /// <summary>
         /// Get a specific book by name.
         /// </summary>
@@ -53,23 +58,23 @@ namespace BooksApi.Controllers
         /// <returns></returns>
         [HttpGet("{title}")]
         [ProducesDefaultResponseType(typeof(Book))]
-        public IActionResult Get(string title)
+        public async Task<IActionResult> Get(string title)
         {
-            var book = _bookDbContext.Books.SingleOrDefault(b => b.Title == title);
+            var book = await _bookService.GetByName(title);
 
             if (book == null)
                 return NotFound();
 
             return Ok(book);
         }
-
+        
         /// <summary>
         /// Create a new book.
         /// </summary>
         /// <param name="bookInputModel">The book to create</param>
         /// <returns></returns>
         [HttpPost]
-        public IActionResult Post([FromBody] BookInputModel bookInputModel)
+        public async Task<IActionResult> Post([FromBody] BookInputModel bookInputModel)
         {
             try
             {
@@ -77,8 +82,7 @@ namespace BooksApi.Controllers
                     return BadRequest();
 
                 var book = new Book(bookInputModel.Title, bookInputModel.Description);
-                _bookDbContext.Books.Add(book);
-                _bookDbContext.SaveChanges();
+                await _bookService.Add(book);
 
                 return CreatedAtAction(nameof(Get), new { id = book.Id }, book);
             }
@@ -87,7 +91,7 @@ namespace BooksApi.Controllers
                 return StatusCode((int)HttpStatusCode.InternalServerError, ex);
             }
         }
-
+        
         /// <summary>
         /// Update a specific book.
         /// </summary>
@@ -95,12 +99,12 @@ namespace BooksApi.Controllers
         /// <param name="bookInputModel">Updated book data</param>
         /// <returns></returns>
         [HttpPut("{id}")]
-        public IActionResult Put(int id, [FromBody] BookInputModel bookInputModel)
+        public async Task<IActionResult> Put(int id, [FromBody] BookInputModel bookInputModel)
         {
             if (bookInputModel == null)
                 return BadRequest();
 
-            var book = _bookDbContext.Books.SingleOrDefault(b => b.Id == id);
+            var book = await _bookService.GetById(id);
 
             if (book == null)
                 return NotFound();
@@ -108,7 +112,7 @@ namespace BooksApi.Controllers
             book.Title = bookInputModel.Title;
             book.Description = bookInputModel.Description;
 
-            _bookDbContext.SaveChanges();
+            await _bookService.Update(book);
 
             return NoContent();
         }
@@ -119,15 +123,14 @@ namespace BooksApi.Controllers
         /// <param name="id">Book Id</param>
         /// <returns></returns>
         [HttpDelete("{id}")]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var book = _bookDbContext.Books.SingleOrDefault(p => p.Id == id);
+            var book = await _bookService.GetById(id);
 
             if (book == null)
                 return NotFound();
 
-            _bookDbContext.Remove(book);
-            _bookDbContext.SaveChanges();
+            await _bookService.Delete(book);
 
             return NoContent();
         }
